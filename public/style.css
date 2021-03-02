@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: local('PlayfairDisplay'), url('fonts/PlayfairDisplay/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Pacifico';
+    src: local('Pacifico'), url('fonts/Pacifico/Pacifico-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'YesevaOne';
+    src: local('YesevaOne'), url('fonts/YesevaOne/YesevaOne-Regular.ttf') format('truetype');
+}
+
+header {
+    text-align: center;
+
+}
+h1 {
+    font-size: 40px;
+    font-family: Pacifico;
+
+}
+h1:hover {
+    cursor: pointer;
+    color: blueviolet;
+}
+
+footer {
+    font-family: YesevaOne;
+}
+
+#root {
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.message-block-main {
+    margin-top: 40px;
+    display: flex;
+}
+
+.message-blog-side {
+    flex: 1;
+}
+
+.message-blog {
+    flex: 3;
+    background-color: floralwhite;
+    padding: 10px;
+    font-family: PlayfairDisplay;
+}
+
+.message-name {
+    font-size: 30px;
+    color:blueviolet;
+    margin-right: 35px;
+}
+.message-text {
+    font-size: 26px;
+}
+
+.write-message {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+p, input, button {
+    font-size: 18px;
+}
+p {
+    display: inline;
+}
+
+.second-input {
+    margin-left: 60px;
+}
