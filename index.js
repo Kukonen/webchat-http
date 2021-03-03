@@ -1,5 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser')
 
 const router = require('./router');
 
@@ -15,6 +16,8 @@ app.set('view engine', 'hbs')
 app.set('views', 'views');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}))
+
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/', router);
 
