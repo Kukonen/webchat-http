@@ -1,0 +1,15 @@
+.menu {
+    flex: 1;
+    background-color: #F5F5F5;
+}
+.menu-bar {
+    height: 90vh;
+}
+.menu-settings{
+    text-align: center;
+    height: 10vh;
+}
+.GearFill {
+    cursor: pointer;
+    color: grey;
+}
