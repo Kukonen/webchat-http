@@ -1,13 +1,30 @@
-const {Sequelize} = require('sequelize')
+// const Pool = require('pg').Pool
+// const pool = new Pool({
+//     user: "postgres",
+//     password: "admin",
+//     host: "localhost",
+//     port: 5432,
+//     database: "messenger"
+// })
 
-module.exports = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-        dialect: "postgres",
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT
+// module.exports = pool
+
+const { Client } = require('pg')
+
+const client = new Client({
+  host: 'localhost',
+  port: 5432,
+  user: 'postgres',
+  password: 'admin',
+  database: "messenger"
+})
+
+client.connect(err => {
+    if (err) {
+      console.error('connection error', err.stack)
+    } else {
+      console.log('connected')
     }
+  })
 
-)
+  module.exports = client;
