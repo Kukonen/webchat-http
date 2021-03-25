@@ -11,22 +11,18 @@ const Register = () => {
         <div className="authorization-block">
             <h1>Sign Up</h1>
             <br/>
-            <form>
+            <form method="post" action="/api/user">
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Login</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    <input type="text" className="form-control" id="login" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    <input type="email" className="form-control" id="email" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Password again</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" />
+                    <input type="password" className="form-control" id="password" />
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
                 <br/>
