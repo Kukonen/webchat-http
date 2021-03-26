@@ -1,14 +1,11 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {bindActionCreators} from "redux";
-import {connect} from "react-redux";
-import * as actions from '../../../Store/Actions/UserActions'
 import './Register.css'
 import {Link} from "react-router-dom";
+import Authorization from '../../../Store/Authorization'
+import {observer} from 'mobx-react-lite'
 
-
-
-const Register = ({changeLogin, changeEmail, changePassword}) => {
+const Register = observer(() => {
 
     return (
         <div className="authorization-block">
@@ -17,15 +14,15 @@ const Register = ({changeLogin, changeEmail, changePassword}) => {
             <form method="post">
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Login</label>
-                    <input type="text" className="form-control" id="login" name = "login" onChange={changeLogin} required/>
+                    <input type="text" className="form-control" id="login" name = "login" required onChange={(event) => Authorization.changeLogin(event.target.value)}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email</label>
-                    <input type="email" className="form-control" id="email" name ="email" onChange={changeEmail} required/>
+                    <input type="email" className="form-control" id="email" name ="email" required onChange={(event) => Authorization.changeEmail(event.target.value)}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" className="form-control" id="password" name="password" onChange={changePassword} required/>
+                    <input type="password" className="form-control" id="password" name="password" required onChange={(event) => Authorization.changePassword(event.target.value)}/>
                 </div>
                 <button type="submit" className="btn btn-primary">Login</button>
                 <br/>
@@ -37,31 +34,6 @@ const Register = ({changeLogin, changeEmail, changePassword}) => {
             </small>
         </div>
     )
-};
+});
 
-
-const mapStateProps = (state) => {
-    return {
-        user: state
-    }
-}
-
-const mapDispatchProps = (dispatch) => {
-    const {changeLogin, changeEmail, changePassword} = bindActionCreators(actions, dispatch)
-    return {
-        changeLogin: (event) => {
-            const login = event.target.value;
-            changeLogin(login);
-        },
-        changeEmail: (event) => {
-            const email = event.target.value;
-            changeEmail(email);
-        },
-        changePassword: (event) => {
-            const password = event.target.value;
-            changePassword(password);
-        }
-    }
-}
-
-export default connect(mapStateProps, mapDispatchProps)(Register);
+export default Register;
