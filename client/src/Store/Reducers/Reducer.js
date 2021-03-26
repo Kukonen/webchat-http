@@ -1,8 +1,8 @@
-import {combineReducers, createStore} from "redux";
-import AuthReducer from "./AuthReducer";
+import {combineReducers} from "redux";
+import UserReducer from "./UserReducer";
 
 let Reducer = combineReducers({
-    //auth: AuthReducer
+    user: UserReducer
 })
 
 export default Reducer;
