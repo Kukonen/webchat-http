@@ -11,7 +11,7 @@ const Register = observer(() => {
         <div className="authorization-block">
             <h1>Sign Up</h1>
             <br/>
-            <form method="post">
+            <div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Login</label>
                     <input type="text" className="form-control" id="login" name = "login" required onChange={(event) => Authorization.changeLogin(event.target.value)}/>
@@ -27,7 +27,7 @@ const Register = observer(() => {
                 <button type="submit" className="btn btn-primary">Login</button>
                 <br/>
                 <br/>
-            </form>
+            </div>
 
             <small className="form-text text-muted">Already have account?
                 <Link to="/login"> Sign in</Link>

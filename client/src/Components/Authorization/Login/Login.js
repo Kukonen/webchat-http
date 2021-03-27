@@ -9,7 +9,7 @@ const Login = () => {
         <div className="authorization-block">
             <h1>Sign In</h1>
             <br/>
-            <form >
+            <div >
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email or login</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
@@ -25,7 +25,7 @@ const Login = () => {
                 <button type="submit" className="btn btn-primary">Login</button>
                 <br/>
                 <br/>
-            </form>
+            </div>
             <small className="form-text text-muted">Don't have account?
                 <Link to="/register"> Sign up</Link>
             </small>
