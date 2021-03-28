@@ -33,7 +33,6 @@ class LoginState {
         }).then((response) => {
             data = JSON.parse(JSON.stringify(response.data))
         })
-        console.log(data)
 
         UserState.login = data.login;
         UserState.password = data.password;
@@ -43,6 +42,11 @@ class LoginState {
             Cookies.set('login', data.login, { expires: 30});
             Cookies.set('password', data.password, { expires: 30});
             Cookies.set('role', data.role, { expires: 30});
+        } else {
+            sessionStorage.setItem('isLogged', true)
+            sessionStorage.setItem('login', data.login)
+            sessionStorage.setItem('password', data.password)
+            sessionStorage.setItem('role', data.role)
         }
         window.location = "/"
 

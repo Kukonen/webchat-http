@@ -74,10 +74,10 @@ class RegisterState {
             UserState.login = this.login;
             UserState.password = result.data;
             UserState.role = 'user';
-            Cookies.set('isLogged', true, { expires: 30});
-            Cookies.set('login', this.login, { expires: 30});
-            Cookies.set('password', result.data, { expires: 30});
-            Cookies.set('role', 'user', { expires: 30});
+            sessionStorage.setItem('isLogged', true)
+            sessionStorage.setItem('login', this.login)
+            sessionStorage.setItem('password', result.data)
+            sessionStorage.setItem('role', 'user')
             window.location = "/"
         }
     }

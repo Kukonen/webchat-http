@@ -9,7 +9,7 @@ class User {
         makeAutoObservable(this);
     }
 
-
+    
 
 }
 

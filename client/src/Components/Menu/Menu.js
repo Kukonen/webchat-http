@@ -1,6 +1,5 @@
 import React from "react";
-import {GearFill} from "react-bootstrap-icons"
-import UserState from "../../Store/User/UserState";
+import {GearFill} from "react-bootstrap-icons";
 import IsLogged from "../User/IsLogged/IsLogged";
 import NoLogged from "../User/NoLogged/NoLogged";
 import {observer} from "mobx-react-lite";
@@ -10,12 +9,7 @@ import './Menu.css'
 
 const Menu = observer(() => {
 
-    let isLogged = Cookies.get('isLogged');
-
-    console.log(Cookies.get('isLogged'))
-    console.log(Cookies.get('login'))
-    console.log(Cookies.get('password'))
-    console.log(Cookies.get('role'))
+    let isLogged = Cookies.get('isLogged') ? true : sessionStorage.getItem('isLogged') ? true : false
 
 
     return (
