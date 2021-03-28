@@ -20,11 +20,11 @@ const Login = observer(() => {
                     <label htmlFor="exampleInputPassword1">Password</label>
                     <input type="password" className="form-control" id="exampleInputPassword1" required onChange={(event) => LoginState.changePassword(event.target.value)} />
                 </div>
-                <div className="form-group form-check">
-                    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Remember me</label>
-                </div>
-                <button type="submit" className="btn btn-primary" onClick={()=> LoginState.loginFunc()}>Login</button>
+                {/*<div className="form-group form-check">*/}
+                {/*    <input type="checkbox" className="form-check-input" id="exampleCheck1" onChange={(event) => LoginState.changeRemember(event.target.checked)}/>*/}
+                {/*        <label className="form-check-label" htmlFor="exampleCheck1">Remember me</label>*/}
+                {/*</div>*/}
+                <input type="button" className="btn btn-primary" onClick={()=> LoginState.loginFunc()} value="Login" />
                 <br/>
                 <br/>
             </div>

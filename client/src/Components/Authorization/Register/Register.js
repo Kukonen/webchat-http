@@ -29,7 +29,7 @@ const Register = observer(() => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" className={RegisterState.passwordValid ? "form-control" : "form-control is-invalid"} id="password" name="password" required onChange={(event) => RegisterState.changePassword(event.target.value)}/>
+                    <input type="password" className={RegisterState.passwordValid ? "form-control" : "form-control is-invalid"} id="password" name="password" required onClick={(event) => RegisterState.changePassword(event.target.value)}/>
                     <div className="invalid-feedback">
                         password is not correct.
                     </div>

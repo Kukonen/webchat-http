@@ -2,8 +2,9 @@ import {makeAutoObservable} from "mobx";
 
 class User {
     login = '';
+    password = '';
     role = '';
-    isLogged = true;
+    isLogged = false;
     constructor() {
         makeAutoObservable(this);
     }
@@ -12,4 +13,4 @@ class User {
 
 }
 
-export default User;
+export default new User();

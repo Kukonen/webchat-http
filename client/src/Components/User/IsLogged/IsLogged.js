@@ -1,9 +1,21 @@
 import React from "react";
+import Cookies from "js-cookie";
 
 const IsLogged = () => {
     return (
-        <div>is logged</div>
+        <div>
+            <br/>
+            <p>Hello, <strong>{Cookies.get('login')}</strong></p>
+            <a href="/" click={loggout()}>Sign out</a>
+        </div>
     )
+}
+
+const loggout = () => {
+    Cookies.remove('login');
+    Cookies.remove('password');
+    Cookies.remove('isLogged');
+    Cookies.remove('role');
 }
 
 export default IsLogged;
