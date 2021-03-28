@@ -10,7 +10,7 @@ class LoginState {
     loginValid = true
     emailValid = true
 
-    isRemember = true
+    isRemember = false
 
     constructor() {
         makeAutoObservable(this)
@@ -39,10 +39,10 @@ class LoginState {
         UserState.password = data.password;
         UserState.role = data.role;
         if (this.isRemember) {
-            Cookies.set('isLogged', true, { expires: 30 });
-            Cookies.set('login', data.login, { expires: 30 });
-            Cookies.set('password', data.password, { expires: 30 });
-            Cookies.set('role', data.role, { expires: 30 });
+            Cookies.set('isLogged', true, { expires: 30});
+            Cookies.set('login', data.login, { expires: 30});
+            Cookies.set('password', data.password, { expires: 30});
+            Cookies.set('role', data.role, { expires: 30});
         }
         window.location = "/"
 

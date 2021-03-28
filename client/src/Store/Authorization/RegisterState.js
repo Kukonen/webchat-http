@@ -34,7 +34,6 @@ class RegisterState {
             password: this.password
         }).then((response) => {
             result = response.data;
-            console.log(response.data)
         })
         if (result.error === 'login invalid') {
             this.loginValid = false
@@ -75,10 +74,10 @@ class RegisterState {
             UserState.login = this.login;
             UserState.password = result.data;
             UserState.role = 'user';
-            Cookies.set('isLogged', true, { expires: 30 });
-            Cookies.set('login', this.login, { expires: 30 });
-            Cookies.set('password', result.data, { expires: 30 });
-            Cookies.set('role', 'user', { expires: 30 });
+            Cookies.set('isLogged', true, { expires: 30});
+            Cookies.set('login', this.login, { expires: 30});
+            Cookies.set('password', result.data, { expires: 30});
+            Cookies.set('role', 'user', { expires: 30});
             window.location = "/"
         }
     }

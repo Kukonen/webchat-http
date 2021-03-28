@@ -45,11 +45,9 @@ class UserController {
         if (!loginValid && emailValid & !passwordValid) {res.json({"data": "", "error": "login and password invalid"}); return 0;}
         if (!loginValid && !emailValid & !passwordValid) {res.json({"data": "", "error": "login and email and password invalid"}); return 0;}
 
-        console.log(password)
         let hashPassword = password + 'some'
         ///////
         hashPassword = md5(hashPassword)
-        console.log(hashPassword)
         ///////
         const role = "user"
         const newUser = await db.query(`INSERT INTO public."Users" (login, email, password, role) values ($1, $2, $3, $4)`, [login, email, hashPassword, role])
@@ -57,14 +55,11 @@ class UserController {
     }
     async login(req, res) {
         const {login, password} = req.body;
-        console.log(login)
-        console.log(password)
         let user = []
         /////
         let hashPassword = password + 'some'
         hashPassword = md5(hashPassword)
         /////
-        console.log(hashPassword)
         await db.query(`SELECT * FROM public."Users" WHERE login = '${login}' AND password = '${hashPassword}'`).then((result) => {
             console.log(result.rows)
             user = JSON.parse(JSON.stringify(result.rows));
@@ -75,7 +70,6 @@ class UserController {
             "password": user[0].password,
             "role": user[0].role
         }
-        console.log(sendMessage)
         res.json(sendMessage)
     }
 }

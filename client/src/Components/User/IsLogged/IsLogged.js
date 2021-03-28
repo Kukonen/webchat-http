@@ -6,7 +6,7 @@ const IsLogged = () => {
         <div>
             <br/>
             <p>Hello, <strong>{Cookies.get('login')}</strong></p>
-            <a href="/" click={loggout()}>Sign out</a>
+            <a href="/" onClick={() => loggout()}>Sign out</a>
         </div>
     )
 }
