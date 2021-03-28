@@ -13,3 +13,7 @@
     cursor: pointer;
     color: grey;
 }
+.menu-user-block {
+    height: 10vh;
+    background-color: darkblue;
+}

@@ -11,7 +11,7 @@ const Login = observer(() => {
         <div className="authorization-block">
             <h1>Sign In</h1>
             <br/>
-            <div >
+            <div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Login</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required onChange={(event) => LoginState.changeLogin(event.target.value)}/>

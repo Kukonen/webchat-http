@@ -6,6 +6,17 @@ class UserController {
     async register(req, res) {
         const {login, email, password} = req.body;
         
+        let loginValid = true
+        let emailValid = true
+        let passwordValid = true
+
+        /********         VALIDATOR        ************** */
+
+        if (!validator.isEmail(email)) emailValid = false;
+        if (validator.isEmpty(login)) loginValid = false;
+        if (validator.isEmpty(email)) emailValid = false;
+        if (validator.isEmpty(password)) passwordValid = false;
+
         /************************************************ */
 
         /**FIND COINCIDENCE LOGIN AND EMAIL FROM DATABASE**/
@@ -20,29 +31,19 @@ class UserController {
             emailСoincidenceСount = JSON.parse(JSON.stringify(result.rows));
         }).catch(e => console.log('error db'))
 
-        if ((!(loginСoincidenceСount.length == 0) && !(emailСoincidenceСount.length == 0)))
-        {
-            res.json("login and email coincidence")
-            return 0;
-        }
-
-        if (!(loginСoincidenceСount.length == 0))
-        {
-            res.json("login coincidence")
-            return 0;
-        }
-
-
-        if (!(emailСoincidenceСount.length == 0))
-        {
-            res.json("email coincidence")
-            return 0;
-        }
+        if (!(loginСoincidenceСount.length == 0)) loginValid = false;
+        if (!(emailСoincidenceСount.length == 0)) emailValid = false;
 
         /************************************************ */
-
-        //validator.isLength(login, {min: 3, max: 30})
         
+        if (!loginValid && emailValid & passwordValid) {res.json("login invalid"); return 0;}
+        if (loginValid && !emailValid & passwordValid) {res.json("email invalid"); return 0;}
+        if (loginValid && emailValid & !passwordValid) {res.json("password invalid"); return 0;}
+        if (!loginValid && !emailValid & passwordValid) {res.json("login and email invalid"); return 0;}
+        if (loginValid && !emailValid & !passwordValid) {res.json("email and password invalid"); return 0;}
+        if (!loginValid && emailValid & !passwordValid) {res.json("login and password invalid"); return 0;}
+        if (!loginValid && !emailValid & !passwordValid) {res.json("login and email and password invalid"); return 0;}
+
         console.log(password)
         const hashPassword = await bcrypt.hash(password, 13)
         console.log(hashPassword)

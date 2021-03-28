@@ -2,14 +2,13 @@ import { makeAutoObservable } from "mobx";
 import axios from "axios";
 
 class RegisterState {
-    id = null
-    login = null
-    email = null
-    password = null
-    role = null
+    login = ""
+    email = ""
+    password = ""
 
     loginValid = true
     emailValid = true
+    passwordValid = true
 
     constructor() {
         makeAutoObservable(this)
@@ -35,21 +34,46 @@ class RegisterState {
             result = response.data;
             console.log(response.data)
         })
-        if (result === 'login and email coincidence') {
-            this.loginValid = false
-            this.emailValid = false
-        }
-        if (result === 'login coincidence') {
-            this.loginValid = false
-            this.emailValid = true
-        }
-        if (result === 'email coincidence') {
-            this.loginValid = true
-            this.emailValid = false
-        }
+
         if (result === 'ok') {
             this.loginValid = true
             this.emailValid = true
+            this.passwordValid = true
+        }
+        if (result === 'login invalid') {
+            this.loginValid = false
+            this.emailValid = true
+            this.passwordValid = true
+        }
+        if (result === 'email invalid') {
+            this.loginValid = true
+            this.emailValid = false
+            this.passwordValid = true
+        }
+        if (result === 'password invalid') {
+            this.loginValid = true
+            this.emailValid = true
+            this.passwordValid = false
+        }
+        if (result === 'login and email invalid') {
+            this.loginValid = false
+            this.emailValid = false
+            this.passwordValid = true
+        }
+        if (result === 'email and password invalid') {
+            this.loginValid = true
+            this.emailValid = false
+            this.passwordValid = false
+        }
+        if (result === 'login and password invalid') {
+            this.loginValid = false
+            this.emailValid = true
+            this.passwordValid = false
+        }
+        if (result === 'login and email and password invalid') {
+            this.loginValid = false
+            this.emailValid = false
+            this.passwordValid = false
         }
     }
 

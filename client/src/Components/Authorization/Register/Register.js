@@ -11,7 +11,7 @@ const Register = observer(() => {
         <div className="authorization-block">
             <h1>Sign Up</h1>
             <br/>
-            <div>
+            <form>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Login</label>
                     <input type="text" className={RegisterState.loginValid ? "form-control" : "form-control is-invalid"} id="login" name = "login" required onChange={(event) => RegisterState.changeLogin(event.target.value)}/>
@@ -29,12 +29,16 @@ const Register = observer(() => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" className="form-control" id="password" name="password" required onChange={(event) => RegisterState.changePassword(event.target.value)}/>
+                    <input type="password" className={RegisterState.passwordValid ? "form-control" : "form-control is-invalid"} id="password" name="password" required onChange={(event) => RegisterState.changePassword(event.target.value)}/>
+                    <div className="invalid-feedback">
+                        password is not correct.
+                    </div>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={()=> RegisterState.registration()}>Regitser</button>
+
+                <input type="button" className="btn btn-primary" onClick={()=> RegisterState.registration()} value="Register"/>
                 <br/>
                 <br/>
-            </div>
+            </form>
 
             <small className="form-text text-muted">Already have account?
                 <Link to="/login"> Sign in</Link>
