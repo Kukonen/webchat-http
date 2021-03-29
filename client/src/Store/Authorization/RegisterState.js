@@ -18,15 +18,16 @@ class RegisterState {
 
     changeLogin (login) {
         this.login = login
-    }
+    };
     changeEmail (email) {
         this.email = email
-    }
+    };
     changePassword (password) {
         this.password = password
-    }
+    };
 
     async registration () {
+
         let result = ''
         await axios.post('/api/register', {
             login: this.login,

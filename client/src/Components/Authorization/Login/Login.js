@@ -14,11 +14,11 @@ const Login = observer(() => {
             <div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Login</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required onChange={(event) => LoginState.changeLogin(event.target.value)}/>
+                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={(event) => LoginState.changeLogin(event.target.value)}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" required onChange={(event) => LoginState.changePassword(event.target.value)} />
+                    <input type="password" className="form-control" id="exampleInputPassword1" onChange={(event) => LoginState.changePassword(event.target.value)} />
                 </div>
                 <div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" id="exampleCheck1" onChange={(event) => LoginState.changeRemember(event.target.checked)}/>

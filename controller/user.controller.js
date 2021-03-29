@@ -4,19 +4,30 @@ const md5 = require('md5')
 
 class UserController {
 
+    onlyLettersAndDigits(str) {
+        console.log(str.matches("^[a-zA-Z0-9]+$"))
+        //return str.matches("^[a-zA-Z0-9]+$");
+    }
+
     async register(req, res) {
         const {login, email, password} = req.body;
-        
+
         let loginValid = true
         let emailValid = true
         let passwordValid = true
 
-        /********         VALIDATOR        ************** */
+        /********         VALIDATION        ************* */
 
         if (!validator.isEmail(email)) emailValid = false;
         if (validator.isEmpty(login)) loginValid = false;
         if (validator.isEmpty(email)) emailValid = false;
         if (validator.isEmpty(password)) passwordValid = false;
+
+        if (!(/^[0-9a-zA-Z-_]+$/.test(login))) loginValid = false;
+        if (!(/^[0-9a-zA-Z]+$/.test(password))) passwordValid = false;
+
+        if (!(login.length > 2 && login.length < 10)) loginValid = false;
+        if (!(password.length > 4 && password.length < 21)) loginValid = false;
 
         /************************************************ */
 

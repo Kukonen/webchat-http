@@ -14,14 +14,14 @@ const Register = observer(() => {
             <form>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Login</label>
-                    <input type="text" className={RegisterState.loginValid ? "form-control" : "form-control is-invalid"} id="login" name = "login" required onChange={(event) => RegisterState.changeLogin(event.target.value)}/>
+                    <input type="text" className={RegisterState.loginValid ? "form-control" : "form-control is-invalid"} id="login" name = "login" onChange={(event) => RegisterState.changeLogin(event.target.value)}/>
                     <div className="invalid-feedback">
                         login is not correct.
                     </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email</label>
-                    <input type="email" className={RegisterState.emailValid ? "form-control" : "form-control is-invalid"} id="email" name ="email" required onChange={(event) => RegisterState.changeEmail(event.target.value)}/>
+                    <input type="email" className={RegisterState.emailValid ? "form-control" : "form-control is-invalid"} id="email" name ="email" onChange={(event) => RegisterState.changeEmail(event.target.value)}/>
                     <div className="invalid-feedback">
                         email is not correct.
                     </div>
@@ -29,7 +29,7 @@ const Register = observer(() => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" className={RegisterState.passwordValid ? "form-control" : "form-control is-invalid"} id="password" name="password" required onClick={(event) => RegisterState.changePassword(event.target.value)}/>
+                    <input type="password" className={RegisterState.passwordValid ? "form-control" : "form-control is-invalid"} id="password" name="password" onChange={(event) => RegisterState.changePassword(event.target.value)}/>
                     <div className="invalid-feedback">
                         password is not correct.
                     </div>

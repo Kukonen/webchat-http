@@ -3,14 +3,13 @@ import {GearFill} from "react-bootstrap-icons";
 import IsLogged from "../User/IsLogged/IsLogged";
 import NoLogged from "../User/NoLogged/NoLogged";
 import {observer} from "mobx-react-lite";
-import Cookies from "js-cookie";
+import UserState from "../../Store/User/UserState";
 
 import './Menu.css'
 
 const Menu = observer(() => {
 
-    let isLogged = Cookies.get('isLogged') ? true : sessionStorage.getItem('isLogged') ? true : false
-
+    let isLogged = UserState.isLogged;
 
     return (
         <div className="menu">
