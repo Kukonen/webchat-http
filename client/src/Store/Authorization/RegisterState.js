@@ -1,7 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
 import UserState from "../User/UserState";
-import Cookies from "js-cookie";
 
 class RegisterState {
     login = ""

@@ -1,0 +1,11 @@
+.InputMessage {
+    padding: 20px;
+}
+
+.InputMessage-block {
+    width: 60%;
+    margin: auto;
+}
+.InputMessage-file {
+    display: none;
+}
