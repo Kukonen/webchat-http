@@ -3,12 +3,6 @@ const validator = require('validator')
 const md5 = require('md5')
 
 class UserController {
-
-    onlyLettersAndDigits(str) {
-        console.log(str.matches("^[a-zA-Z0-9]+$"))
-        //return str.matches("^[a-zA-Z0-9]+$");
-    }
-
     async register(req, res) {
         const {login, email, password} = req.body;
 
@@ -72,7 +66,6 @@ class UserController {
         hashPassword = md5(hashPassword)
         /////
         await db.query(`SELECT * FROM public."Users" WHERE login = '${login}' AND password = '${hashPassword}'`).then((result) => {
-            console.log(result.rows)
             user = JSON.parse(JSON.stringify(result.rows));
         }).catch(e => console.log('error db'))
 
@@ -82,6 +75,34 @@ class UserController {
             "role": user[0].role
         }
         res.json(sendMessage)
+    }
+
+    async send(req, res) {
+        const {login, password, text} = req.body;
+        let user = []
+        await db.query(`SELECT * FROM public."Users" WHERE login = '${login}' AND password = '${password}'`).then((result) => {
+            user = JSON.parse(JSON.stringify(result.rows));
+        }).catch(e => console.log('error db'))
+
+        let hours = new Date().getFullYear();
+        let month = new Date().getMonth() + 1;
+        let day = new Date().getDate();
+        let hour = new Date().getHours();
+        let minutes = new Date().getMinutes();
+        let seconds = new Date().getSeconds()
+
+        let date = '' + hours + '.' + month + '.' + day + '.' + hour + '.' + minutes + '.' + seconds;
+
+        const newMessage = await db.query(`INSERT INTO public."Messages" (date, userId, text) values ($1, $2, $3)`, [date ,user[0].id, text])
+        
+        res.json("ok")
+    }
+    async messages(req, res) {
+        let user = []
+        await db.query(`SELECT * FROM public."Messages"`).then((result) => {
+            user = JSON.parse(JSON.stringify(result.rows));
+        }).catch(e => console.log('error db'))
+        res.json(user)
     }
 }
 
