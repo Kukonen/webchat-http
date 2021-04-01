@@ -84,14 +84,14 @@ class UserController {
             user = JSON.parse(JSON.stringify(result.rows));
         }).catch(e => console.log('error db'))
 
-        let hours = new Date().getFullYear();
+        let years = new Date().getFullYear();
         let month = new Date().getMonth() + 1;
         let day = new Date().getDate();
         let hour = new Date().getHours();
         let minutes = new Date().getMinutes();
         let seconds = new Date().getSeconds()
 
-        let date = '' + hours + '.' + month + '.' + day + '.' + hour + '.' + minutes + '.' + seconds;
+        let date = '' + years + '.' + month + '.' + day + '.' + hour + '.' + minutes + '.' + seconds;
 
         const newMessage = await db.query(`INSERT INTO public."Messages" (date, username, text) values ($1, $2, $3)`, [date ,user[0].login, text])
         

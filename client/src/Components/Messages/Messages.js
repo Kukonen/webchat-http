@@ -18,12 +18,21 @@ const Messages = observer(() => {
         )
     });
 
+    const takeLastMessage = () => {
+        if (MessagesState.messages.length !== 0) {
+            let lastMessage = document.getElementsByClassName("Message");
+            lastMessage[lastMessage.length - 1].scrollIntoView()
+        }
+    };
 
     return (
-        <div className="Messages">
+        <div id="Messages">
             {messages}
+            {(MessagesState.isFirstOpen) ? takeLastMessage() : console.log("haven't messages")}
+            {/*{setTimeout(takeLastMessage, 1000)}*/}
         </div>
     )
 })
+
 
 export default Messages;
