@@ -93,7 +93,7 @@ class UserController {
 
         let date = '' + hours + '.' + month + '.' + day + '.' + hour + '.' + minutes + '.' + seconds;
 
-        const newMessage = await db.query(`INSERT INTO public."Messages" (date, userId, text) values ($1, $2, $3)`, [date ,user[0].id, text])
+        const newMessage = await db.query(`INSERT INTO public."Messages" (date, username, text) values ($1, $2, $3)`, [date ,user[0].login, text])
         
         res.json("ok")
     }

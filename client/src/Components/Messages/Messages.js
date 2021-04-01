@@ -10,11 +10,11 @@ const Messages = observer(() => {
     const messages = MessagesState.messages.map((item) => {
         const id = item.id;
         const date = item.date;
-        const userid = item.userid;
+        const username = item.username;
         const text = item.text;
 
         return (
-            <Message key={id} {...{date, userid, text}} />
+            <Message key={id} {...{date, username, text}} />
         )
     });
 
