@@ -8,7 +8,6 @@ class LoginState {
     password = ''
 
     loginValid = true
-    emailValid = true
 
     isRemember = false
 

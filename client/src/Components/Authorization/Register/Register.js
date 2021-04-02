@@ -15,17 +15,10 @@ const Register = observer(() => {
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Login</label>
                     <input type="text" className={RegisterState.loginValid ? "form-control" : "form-control is-invalid"} id="login" name = "login" onChange={(event) => RegisterState.changeLogin(event.target.value)}/>
+                    <small className="form-text text-muted">3-12 symbols of letters and number (can use "-" "_")</small>
                     <div className="invalid-feedback">
                         login is not correct.
                     </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email</label>
-                    <input type="email" className={RegisterState.emailValid ? "form-control" : "form-control is-invalid"} id="email" name ="email" onChange={(event) => RegisterState.changeEmail(event.target.value)}/>
-                    <div className="invalid-feedback">
-                        email is not correct.
-                    </div>
-
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>

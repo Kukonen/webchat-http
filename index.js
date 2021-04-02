@@ -8,7 +8,7 @@ const app = express()
 
 app.use(express.json())
 app.use('/api', userRouter)
-
+app.use(express.static('static'))
 
 const start = async () => {
     try {

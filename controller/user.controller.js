@@ -1,61 +1,48 @@
 const db = require('../db')
 const validator = require('validator')
 const md5 = require('md5')
+const uuid = require('uuid')
 
 class UserController {
     async register(req, res) {
-        const {login, email, password} = req.body;
+        const {login, password} = req.body;
 
         let loginValid = true
-        let emailValid = true
         let passwordValid = true
 
         /********         VALIDATION        ************* */
 
-        if (!validator.isEmail(email)) emailValid = false;
         if (validator.isEmpty(login)) loginValid = false;
-        if (validator.isEmpty(email)) emailValid = false;
         if (validator.isEmpty(password)) passwordValid = false;
 
         if (!(/^[0-9a-zA-Z-_]+$/.test(login))) loginValid = false;
         if (!(/^[0-9a-zA-Z]+$/.test(password))) passwordValid = false;
 
-        if (!(login.length > 2 && login.length < 10)) loginValid = false;
+        if (!(login.length > 2 && login.length < 13)) loginValid = false;
         if (!(password.length > 4 && password.length < 21)) loginValid = false;
 
         /************************************************ */
 
-        /**FIND COINCIDENCE LOGIN AND EMAIL FROM DATABASE**/
+        /**FIND COINCIDENCE      LOGIN      FROM DATABASE**/
 
         let loginСoincidenceСount = []
         await db.query(`SELECT * FROM public."Users" WHERE login = '${login}'`).then((result) => {
             loginСoincidenceСount = JSON.parse(JSON.stringify(result.rows));
         }).catch(e => console.log('error db'))
-        
-        let emailСoincidenceСount = []
-        await db.query(`SELECT * FROM public."Users" WHERE email = '${email}'`).then((result) => {
-            emailСoincidenceСount = JSON.parse(JSON.stringify(result.rows));
-        }).catch(e => console.log('error db'))
-
         if (!(loginСoincidenceСount.length == 0)) loginValid = false;
-        if (!(emailСoincidenceСount.length == 0)) emailValid = false;
 
         /************************************************ */
         
-        if (!loginValid && emailValid & passwordValid) {res.json({"data": "", "error": "login invalid"}); return 0;}
-        if (loginValid && !emailValid & passwordValid) {res.json({"data": "", "error": "email invalid"}); return 0;}
-        if (loginValid && emailValid & !passwordValid) {res.json({"data": "", "error": "password invalid"}); return 0;}
-        if (!loginValid && !emailValid & passwordValid) {res.json({"data": "", "error": "login and email invalid"}); return 0;}
-        if (loginValid && !emailValid & !passwordValid) {res.json({"data": "", "error": "email and password invalid"}); return 0;}
-        if (!loginValid && emailValid & !passwordValid) {res.json({"data": "", "error": "login and password invalid"}); return 0;}
-        if (!loginValid && !emailValid & !passwordValid) {res.json({"data": "", "error": "login and email and password invalid"}); return 0;}
+        if (!loginValid && passwordValid) {res.json({"data": "", "error": "login invalid"}); return 0;}
+        if (loginValid && !passwordValid) {res.json({"data": "", "error": "password invalid"}); return 0;}
+        if (!loginValid && !passwordValid) {res.json({"data": "", "error": "login and password invalid"}); return 0;}
 
         let hashPassword = password + 'some'
         ///////
         hashPassword = md5(hashPassword)
         ///////
         const role = "user"
-        const newUser = await db.query(`INSERT INTO public."Users" (login, email, password, role) values ($1, $2, $3, $4)`, [login, email, hashPassword, role])
+        const newUser = await db.query(`INSERT INTO public."Users" (login, password, role) values ($1, $2, $3)`, [login, hashPassword, role])
         res.json({"data": hashPassword, "error": "ok"})
     }
     async login(req, res) {
@@ -104,6 +91,13 @@ class UserController {
         }).catch(e => console.log('error db'))
         res.json(user)
     }
+
+    async changeAvatar(req, res) {
+        const file = req.files.file;
+        const avatarName = uuid.v4() + ".jpg";
+    }
+
+
 }
 
 module.exports = new UserController()
