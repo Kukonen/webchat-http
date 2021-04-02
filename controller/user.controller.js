@@ -95,6 +95,8 @@ class UserController {
     async changeAvatar(req, res) {
         const file = req.files.file;
         const avatarName = uuid.v4() + ".jpg";
+        file.mv(process.env.staticPath + "\\" + avatarName)
+        return res.json("ok")
     }
 
 

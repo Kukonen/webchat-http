@@ -4,6 +4,7 @@ import IsLogged from "../User/IsLogged/IsLogged";
 import NoLogged from "../User/NoLogged/NoLogged";
 import {observer} from "mobx-react-lite";
 import UserState from "../../Store/User/UserState";
+import {Link} from "react-router-dom";
 
 import './Menu.css'
 
@@ -19,7 +20,7 @@ const Menu = observer(() => {
                 </div>
             </div>
             <div className="menu-settings" >
-                <GearFill className="GearFill" size={70}/>
+                <Link to="/settings"><GearFill className="GearFill" size={70}/></Link>
             </div>
         </div>
     )
