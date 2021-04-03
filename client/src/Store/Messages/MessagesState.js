@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import axios from "axios";
 
 class MessagesState {
@@ -10,12 +10,16 @@ class MessagesState {
         makeAutoObservable(this)
         this.getMessage();
     }
+
     async getMessage() {
         await axios.get('/api/messages').then((result) => {
             if (result.data.length > this.messages.length) {
                 this.messages = result.data;
             }
-            this.isFirstOpen = true
+            runInAction(()=> {
+                this.isFirstOpen = true
+            })
+
         })
 
         this.getMessage();

@@ -2,10 +2,17 @@ import React from "react";
 import Cookies from "js-cookie";
 import './IsLogged.css'
 import UserState from "../../../Store/User/UserState";
+import {observer} from "mobx-react-lite";
 
 
+const IsLogged = observer(() => {
+    console.log(UserState.avatar)
 
-const IsLogged = () => {
+    const avatarImg = () => {
+        const avatarPath = "http://localhost:3030/" + UserState.avatar;
+        return (<img className="IsLogged-avatar-image" src={avatarPath} alt="avatar"/>)
+    }
+
     return (
         <div>
             {UserState.avatar !== null ? avatarImg() : <span>no avatar</span>}
@@ -19,12 +26,9 @@ const IsLogged = () => {
             <a href="/" onClick={() => loggout()}>Sign out</a>
         </div>
     )
-};
+});
 
-const avatarImg = () => {
-    const avatarPath = "http://localhost:3030/" + UserState.avatar;
-    return (<img className="IsLogged-avatar-image" src={avatarPath} alt="avatar"/>)
-}
+
 
 const loggout = () => {
     Cookies.remove('login');

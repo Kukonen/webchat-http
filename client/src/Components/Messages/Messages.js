@@ -28,8 +28,7 @@ const Messages = observer(() => {
     return (
         <div id="Messages">
             {messages}
-            {(MessagesState.isFirstOpen) ? takeLastMessage() : console.log("haven't messages")}
-            {/*{setTimeout(takeLastMessage, 1000)}*/}
+            {(MessagesState.isFirstOpen) ? takeLastMessage() : null}
         </div>
     )
 })
