@@ -8,8 +8,6 @@ import AvatarImg from "./AvatarImg/AvatarImg";
 
 const IsLogged = observer(() => {
 
-    console.log(UserState.avatar)
-
     return (
         <div>
             <AvatarImg />

@@ -1,6 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import axios from "axios";
 import UserState from "../User/UserState";
+import Cookies from "js-cookie";
 
 class SettingsState {
 
@@ -30,8 +31,13 @@ class SettingsState {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        }).then((response) => {
-            console.log("WOW")
+        }).then((result) => {
+            console.log(result)
+            UserState.avatar = result.data
+            if (Cookies.get('login'))
+                Cookies.set('avatar', result.data)
+            if (sessionStorage.getItem('login'))
+                sessionStorage.setItem('avatar', result.data)
         })
     }
 }

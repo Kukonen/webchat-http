@@ -58,6 +58,8 @@ class UserController {
             user = JSON.parse(JSON.stringify(result.rows));
         }).catch(e => console.log('error db'))
 
+        console.log(user);
+
         let sendMessage = {
             "login": user[0].login,
             "password": user[0].password,
@@ -115,9 +117,6 @@ class UserController {
     }
 
     async changeAvatar(req, res) {
-        // const file = req.files.file;
-        // const avatarName = uuid.v4() + ".jpg";
-        // file.mv(process.env.staticPath + "\\" + avatarName)
         const form = formidable({ multiples: true });
         let file = null
         let filePathInServer = ""
@@ -144,6 +143,8 @@ class UserController {
         
 
         fs.rename(file.path, "C:\\Users\\evgen\\Desktop\\react-apps\\webchat\\static\\" + avatarName, () => console.log("ok"))
+
+        res.json(avatarName)
     }
 
     async getUserAvatar(req, res) {
