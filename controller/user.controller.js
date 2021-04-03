@@ -142,7 +142,7 @@ class UserController {
         });
         
 
-        fs.rename(file.path, "C:\\Users\\evgen\\Desktop\\react-apps\\webchat\\static\\" + avatarName, () => console.log("ok"))
+        fs.rename(file.path, process.env.staticPath + "\\" + avatarName, () => console.log("ok"))
 
         res.json(avatarName)
     }

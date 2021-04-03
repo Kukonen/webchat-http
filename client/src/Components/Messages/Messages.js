@@ -21,7 +21,7 @@ const Messages = observer(() => {
     console.log(messages)
 
     const takeLastMessage = () => {
-        if (MessagesState.messages.length !== 0) {
+        if (MessagesState.messages.length !== 0 && MessagesState.messages.length !== 1) {
             let lastMessage = document.getElementsByClassName("Message");
             lastMessage[lastMessage.length - 1].scrollIntoView()
         }

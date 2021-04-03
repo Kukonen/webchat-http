@@ -15,7 +15,7 @@ class InputMessageState {
     }
 
     async sendMessage() {
-        if (UserState.isLogged)
+        if (UserState.isLogged && this.text !== '')
         {
             await axios.post('/api/send', {
                 login: UserState.login,

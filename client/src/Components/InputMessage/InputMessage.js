@@ -11,7 +11,7 @@ const InputMessage = observer(() => {
             <div className="InputMessage">
             <div className="InputMessage-block">
                 <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Message" aria-label="Имя получателя"
+                    <input type="text" className="form-control" placeholder="Message" aria-label="Имя получателя" value={InputMessageState.text}
                            aria-describedby="basic-addon2" onChange={(event) => InputMessageState.changeText(event.target.value)}/>
                         <div className="input-group-append">
                             <button className="btn btn-outline-secondary" type="button" onClick={() => InputMessageState.sendMessage()}>Send</button>
