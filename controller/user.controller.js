@@ -1,7 +1,9 @@
-const db = require('../db')
-const validator = require('validator')
-const md5 = require('md5')
-const uuid = require('uuid')
+const db = require('../db');
+const validator = require('validator');
+const md5 = require('md5');
+const uuid = require('uuid');
+const formidable = require('formidable');
+const fs = require('fs')
 
 class UserController {
     async register(req, res) {
@@ -59,6 +61,7 @@ class UserController {
         let sendMessage = {
             "login": user[0].login,
             "password": user[0].password,
+            "avatar": user[0].avatar,
             "role": user[0].role
         }
         res.json(sendMessage)
@@ -93,10 +96,35 @@ class UserController {
     }
 
     async changeAvatar(req, res) {
-        const file = req.files.file;
+        // const file = req.files.file;
+        // const avatarName = uuid.v4() + ".jpg";
+        // file.mv(process.env.staticPath + "\\" + avatarName)
+        const form = formidable({ multiples: true });
+        let file = null
+        let filePathInServer = ""
+        let userInformation = {}
         const avatarName = uuid.v4() + ".jpg";
-        file.mv(process.env.staticPath + "\\" + avatarName)
-        return res.json("ok")
+        await new Promise((resolve, reject) => {
+            form.parse(req, (err, fields, files) => {
+                if (err) {
+                    reject(() => console.log(err));
+                    return;
+                }
+                userInformation = JSON.parse(JSON.stringify(fields));
+                file = files.file
+                filePathInServer = file.path + "\\" + file.name;
+                resolve()
+            })
+        }).then(async () => {
+            await db.query(`SELECT * FROM public."Users" WHERE login = '${userInformation.login}' AND password = '${userInformation.password}'`).then(async () => {
+                await db.query(`UPDATE public."Users" SET avatar = '${avatarName}' WHERE login = '${userInformation.login}' AND password = '${userInformation.password}'`).then( () => {
+                    console.log('aratar added in db')
+                })
+            }).catch(e => console.log('error db'))
+        });
+        
+
+        fs.rename(file.path, "C:\\Users\\evgen\\Desktop\\react-apps\\webchat\\static\\" + avatarName, () => console.log("ok"))
     }
 
 

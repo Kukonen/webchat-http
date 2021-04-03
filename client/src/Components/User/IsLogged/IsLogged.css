@@ -1,0 +1,11 @@
+.IsLogged-avatar-image {
+    height: 50px;
+    width: 50px;
+}
+.IsLogged-username {
+    font-weight: bold;
+    color: #2f47bd;
+}
+.IsLogged-hello-title {
+    display: inline;
+}
