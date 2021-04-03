@@ -8,15 +8,17 @@ import {observer} from "mobx-react-lite";
 const Messages = observer(() => {
 
     const messages = MessagesState.messages.map((item) => {
-        const id = item.id;
+        const login = item.login;
         const date = item.date;
-        const username = item.username;
+        const avatar = item.avatar;
         const text = item.text;
 
         return (
-            <Message key={id} {...{date, username, text}} />
+            <Message {...{login, date, avatar, text}} />
         )
     });
+
+    console.log(messages)
 
     const takeLastMessage = () => {
         if (MessagesState.messages.length !== 0) {

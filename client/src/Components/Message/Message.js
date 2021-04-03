@@ -1,17 +1,24 @@
 import React from 'react'
-
+import MessagesState from "../../Store/Messages/MessagesState";
 import './Message.css'
 
 const Message = (props) => {
 
-    const {date, username, text} = props
+    const {login, date, avatar, text} = props
 
     const array = date.split(".")
+
+    // let avatarPath = MessagesState.getUserAvatar()
+
+    console.log(avatar)
+
+    const avatarURL = avatar === '' ? "http://localhost:3030/default-icon.jpg" : "http://localhost:3030/" + avatar;
 
     return (
         <div className="Message">
             <div className="Message-information-block">
-                <span className="Message-username">{username}</span>
+                <img src={avatarURL} alt="avatar" className="Message-avatar-img"/>&nbsp;&nbsp;
+                <span className="Message-username">{login}</span>
                 <span className="Message-date">{array[3]}:{array[4]}</span>
             </div>
             <div className="Message-text-block">

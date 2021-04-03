@@ -3,19 +3,16 @@ import Cookies from "js-cookie";
 import './IsLogged.css'
 import UserState from "../../../Store/User/UserState";
 import {observer} from "mobx-react-lite";
+import AvatarImg from "./AvatarImg/AvatarImg";
 
 
 const IsLogged = observer(() => {
-    console.log(UserState.avatar)
 
-    const avatarImg = () => {
-        const avatarPath = "http://localhost:3030/" + UserState.avatar;
-        return (<img className="IsLogged-avatar-image" src={avatarPath} alt="avatar"/>)
-    }
+    console.log(UserState.avatar)
 
     return (
         <div>
-            {UserState.avatar !== null ? avatarImg() : <span>no avatar</span>}
+            <AvatarImg />
             <br/>
             <span className="IsLogged-username" style={UserState.login.length < 9 ? {fontSize: '20px'} :
                 UserState.login.length < 11 ? {fontSize: '16px'} :

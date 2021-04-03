@@ -1,5 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import axios from "axios";
+import UserState from "../User/UserState";
 
 class MessagesState {
     messages = []

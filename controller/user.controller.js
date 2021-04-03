@@ -44,7 +44,7 @@ class UserController {
         hashPassword = md5(hashPassword)
         ///////
         const role = "user"
-        const newUser = await db.query(`INSERT INTO public."Users" (login, password, role) values ($1, $2, $3)`, [login, hashPassword, role])
+        const newUser = await db.query(`INSERT INTO public."Users" (login, avatar, password, role) values ($1, $2, $3, $4)`, [login, '', hashPassword, role])
         res.json({"data": hashPassword, "error": "ok"})
     }
     async login(req, res) {
@@ -88,11 +88,30 @@ class UserController {
         res.json("ok")
     }
     async messages(req, res) {
-        let user = []
+        let messages = []
         await db.query(`SELECT * FROM public."Messages"`).then((result) => {
-            user = JSON.parse(JSON.stringify(result.rows));
+            messages = JSON.parse(JSON.stringify(result.rows));
         }).catch(e => console.log('error db'))
-        res.json(user)
+
+        
+
+        let data = []
+
+        for (let i = 0; i < messages.length; ++i) {
+            let user = []
+            await db.query(`SELECT * FROM public."Users" WHERE login = '${messages[i].username}'`).then((result) => {
+                user = JSON.parse(JSON.stringify(result.rows));
+            }).catch(e => console.log('error db'))
+                
+            data.push({
+                login: messages[i].username,
+                date: messages[i].date,
+                avatar: user[0].avatar,
+                text: messages[i].text
+            })
+        }
+
+        res.json(data)
     }
 
     async changeAvatar(req, res) {
@@ -127,7 +146,15 @@ class UserController {
         fs.rename(file.path, "C:\\Users\\evgen\\Desktop\\react-apps\\webchat\\static\\" + avatarName, () => console.log("ok"))
     }
 
+    async getUserAvatar(req, res) {
+        const login = req.login;
 
+        await db.query(`SELECT * FROM public."Users" WHERE login = '${login}'`).then((result) => {
+            user = JSON.parse(JSON.stringify(result.rows));
+        }).catch(e => console.log('error db'))
+
+        res.json(user[0].avatar)
+    }
 }
 
 module.exports = new UserController()
