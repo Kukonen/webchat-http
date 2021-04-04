@@ -2,8 +2,11 @@
     width: 60%;
     margin: 10px auto;
 }
-.Message-information-block {
+.Message-information-block-main {
     padding: 10px;
+}
+.Message-information-block {
+    display: inline-block;
 }
 .Message-username {
     color: #7d42fc;
@@ -11,7 +14,7 @@
     font-size: 18px;
 }
 .Message-date {
-    margin-left: 20px;
+    margin-left: 5px;
     color: grey;
     font-size: 14px;
 }

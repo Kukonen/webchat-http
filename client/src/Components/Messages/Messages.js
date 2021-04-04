@@ -8,13 +8,14 @@ import {observer} from "mobx-react-lite";
 const Messages = observer(() => {
 
     const messages = MessagesState.messages.map((item) => {
+        const id = item.id;
         const login = item.login;
         const date = item.date;
         const avatar = item.avatar;
         const text = item.text;
         const images = item.images;
         return (
-            <Message {...{login, date, avatar, text, images}} />
+            <Message key={id} {...{login, date, avatar, text, images}} />
         )
     });
 

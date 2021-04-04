@@ -1,4 +1,7 @@
 .message-images {
-    height: 200px;
-    width: 200px;
+    cursor: pointer;
+}
+.message-images-normal-size {
+    height: 300px;
+    width: 300px;
 }

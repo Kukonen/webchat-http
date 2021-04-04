@@ -126,6 +126,7 @@ class UserController {
                 user = JSON.parse(JSON.stringify(result.rows));
             }).catch(e => console.log('error db'))
             data.push({
+                id: messages[i].id,
                 login: messages[i].username,
                 date: messages[i].date,
                 avatar: user[0].avatar,

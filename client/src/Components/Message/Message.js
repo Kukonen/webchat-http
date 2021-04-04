@@ -14,10 +14,16 @@ const Message = (props) => {
 
     return (
         <div className="Message">
-            <div className="Message-information-block">
-                <img src={avatarURL} alt="avatar" className="Message-avatar-img"/>&nbsp;&nbsp;
-                <span className="Message-username">{login}</span>
-                <span className="Message-date">{array[3]}:{array[4]}</span>
+            <div className="Message-information-block-main">
+                <div className="Message-information-block">
+                    <img src={avatarURL} alt="avatar" className="Message-avatar-img"/>&nbsp;&nbsp;
+                </div>
+                <div className="Message-information-block">
+                    <span className="Message-username">{login}</span>
+                    <span className="Message-date">{array[3]}:{array[4]}</span>
+                </div>
+
+
             </div>
             <div className="Message-text-block">
                 <span className="Message-text">{text}</span>
