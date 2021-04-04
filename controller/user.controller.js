@@ -117,7 +117,6 @@ class UserController {
             messages = JSON.parse(JSON.stringify(result.rows));
         }).catch(e => console.log('error db'))
 
-        
 
         let data = []
 
@@ -126,15 +125,14 @@ class UserController {
             await db.query(`SELECT * FROM public."Users" WHERE login = '${messages[i].username}'`).then((result) => {
                 user = JSON.parse(JSON.stringify(result.rows));
             }).catch(e => console.log('error db'))
-                
             data.push({
                 login: messages[i].username,
                 date: messages[i].date,
                 avatar: user[0].avatar,
-                text: messages[i].text
+                text: messages[i].text,
+                images: messages[i].images
             })
         }
-
         res.json(data)
     }
 

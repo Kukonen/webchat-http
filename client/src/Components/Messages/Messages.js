@@ -12,13 +12,11 @@ const Messages = observer(() => {
         const date = item.date;
         const avatar = item.avatar;
         const text = item.text;
-
+        const images = item.images;
         return (
-            <Message {...{login, date, avatar, text}} />
+            <Message {...{login, date, avatar, text, images}} />
         )
     });
-
-    console.log(messages)
 
     const takeLastMessage = () => {
         if (MessagesState.messages.length !== 0 && MessagesState.messages.length !== 1) {

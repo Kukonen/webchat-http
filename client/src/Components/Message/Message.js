@@ -1,15 +1,14 @@
 import React from 'react'
 import './Message.css'
+import MessageImage from "./MessageImage/MessageImage";
 
 const Message = (props) => {
 
-    const {login, date, avatar, text} = props
+    const {login, date, avatar, text, images} = props
 
     const array = date.split(".")
 
     // let avatarPath = MessagesState.getUserAvatar()
-
-    console.log(avatar)
 
     const avatarURL = avatar === '' ? "http://localhost:3030/default-icon.jpg" : "http://localhost:3030/" + avatar;
 
@@ -23,7 +22,7 @@ const Message = (props) => {
             <div className="Message-text-block">
                 <span className="Message-text">{text}</span>
             </div>
-            <br/>
+            {images !== null ? <MessageImage {...{images}} /> : null}
             <hr/>
         </div>
     )
