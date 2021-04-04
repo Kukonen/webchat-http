@@ -32,7 +32,6 @@ class SettingsState {
                 'Content-Type': 'multipart/form-data'
             }
         }).then((result) => {
-            console.log(result)
             UserState.avatar = result.data
             if (Cookies.get('login'))
                 Cookies.set('avatar', result.data)

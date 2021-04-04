@@ -5,7 +5,23 @@
 .InputMessage-block {
     width: 60%;
     margin: auto;
+    display: flex;
 }
 .InputMessage-file {
     display: none;
+}
+.InputMessage-images-input {
+    width: 76px;
+}
+.InputMessage-images-block {
+    width: 76px;
+}
+.InputMessage-submit-button {
+    flex: 1;
+}
+.input-group-2 {
+    display: flex;
+}
+.InputMessage-images-label {
+    width: 76px;
 }

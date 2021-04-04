@@ -1,5 +1,4 @@
 import React from 'react'
-import MessagesState from "../../Store/Messages/MessagesState";
 import './Message.css'
 
 const Message = (props) => {

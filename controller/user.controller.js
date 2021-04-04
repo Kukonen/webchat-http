@@ -70,23 +70,45 @@ class UserController {
     }
 
     async send(req, res) {
-        const {login, password, text} = req.body;
-        let user = []
-        await db.query(`SELECT * FROM public."Users" WHERE login = '${login}' AND password = '${password}'`).then((result) => {
-            user = JSON.parse(JSON.stringify(result.rows));
-        }).catch(e => console.log('error db'))
-
-        let years = new Date().getFullYear();
-        let month = new Date().getMonth() + 1;
-        let day = new Date().getDate();
-        let hour = new Date().getHours();
-        let minutes = new Date().getMinutes();
-        let seconds = new Date().getSeconds()
-
-        let date = '' + years + '.' + month + '.' + day + '.' + hour + '.' + minutes + '.' + seconds;
-
-        const newMessage = await db.query(`INSERT INTO public."Messages" (date, username, text) values ($1, $2, $3)`, [date ,user[0].login, text])
         
+        const form = formidable({ multiples: true });
+        let file = null
+        let filePathInServer = ""
+        let fileInformation = {}
+        let imageName = uuid.v4() + ".jpg";
+        await new Promise((resolve, reject) => {
+            form.parse(req, (err, fields, files) => {
+                if (err) {
+                    reject(() => console.log(err));
+                    return;
+                }
+                fileInformation = JSON.parse(JSON.stringify(fields));
+                file = files.file
+                if (file !== undefined)
+                    filePathInServer = file.path + "\\" + file.name;
+                else
+                    imageName = null;
+                resolve()
+            })
+        }).then(async () => {
+            await db.query(`SELECT * FROM public."Users" WHERE login = '${fileInformation.login}' AND password = '${fileInformation.password}'`).then( async (result) => {
+                if (result.rows.length > 0) {
+                    let years = new Date().getFullYear();
+                    let month = new Date().getMonth() + 1;
+                    let day = new Date().getDate();
+                    let hour = new Date().getHours();
+                    let minutes = new Date().getMinutes();
+                    let seconds = new Date().getSeconds();
+
+                    let date = '' + years + '.' + month + '.' + day + '.' + hour + '.' + minutes + '.' + seconds;
+
+                    const newMessage = await db.query(`INSERT INTO public."Messages" (date, username, text, images) values ($1, $2, $3, $4)`, [date ,result.rows[0].login, fileInformation.text, imageName])
+                }
+            })
+        });
+
+        if (file !== undefined)
+            fs.rename(file.path, process.env.staticPath + "\\" + imageName, () => console.log("ok"))
         res.json("ok")
     }
     async messages(req, res) {

@@ -6,6 +6,8 @@ class InputMessageState {
 
     text = ''
 
+    imageFile = null;
+
     constructor() {
         makeAutoObservable(this)
     }
@@ -14,15 +16,27 @@ class InputMessageState {
         this.text = text;
     }
 
+    changeImg (element) {
+        this.imageFile = element.target.files[0];
+    }
+
     async sendMessage() {
+
+        let formData = new FormData();
+        formData.append("file", this.imageFile);
+        formData.append('login', UserState.login);
+        formData.append('password', UserState.password);
+        formData.append('text', this.text);
+
         if (UserState.isLogged && this.text !== '')
         {
-            await axios.post('/api/send', {
-                login: UserState.login,
-                password: UserState.password,
-                text: this.text
+            await axios.post('/api/send', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             }).then(() => {
                 this.text = '';
+                this.imageFile = null;
             })
         }
 
